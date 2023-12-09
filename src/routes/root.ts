@@ -5,7 +5,7 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.get('/', {
     schema: rootSchema
   }, async function (request, reply) {
-    return { message: "hello", root: !true }
+    return { message: "hello2", root: !true }
   })
 }
 

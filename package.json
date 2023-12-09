@@ -8,6 +8,10 @@
     "test": "test"
   },
   "scripts": {
+    "production:run": "pm2 start \"npm run start\" --name fastify-app",
+    "production:stop": "pm2 stop fastify-app",
+    "production:logs": "pm2 logs fastify-app",
+    "production:restart": "pm2 restart fastify-app",
     "start": "npm run build:ts && fastify start -l info dist/app.js",
     "build:ts": "tsc",
     "watch:ts": "tsc -w",
@@ -34,14 +38,15 @@
     "fastify": "^4.0.0",
     "fastify-cli": "^5.9.0",
     "fastify-plugin": "^4.0.0",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "pm2": "^5.3.0"
   },
   "devDependencies": {
     "@types/node": "^20.4.4",
     "@types/tap": "^15.0.5",
     "c8": "^7.13.0",
     "concurrently": "^8.2.2",
-    "fastify-tsconfig": "^2.0.0",
+    "fastify-tsconfig": "^1.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^5.2.2"
   }

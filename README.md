@@ -46,4 +46,3 @@ npm run mysql:start
 ```bash
 npm run mysql:stop
 ```
-
