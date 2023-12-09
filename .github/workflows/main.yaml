@@ -45,7 +45,7 @@ jobs:
           username: ${{ vars.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ vars.SERVER_PORT }}
-          source: "/"
+          source: "."
           target: "/cineplex"
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
