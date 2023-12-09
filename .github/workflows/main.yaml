@@ -43,7 +43,7 @@ jobs:
         with:
           host: ${{ vars.SERVER_HOST }}
           username: ${{ vars.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ vars.SERVER_PORT }}
           source: "."
           target: "/cineplex"
