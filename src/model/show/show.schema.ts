@@ -2,15 +2,15 @@ import { RouteShorthandOptions } from "fastify";
 
 const show = {
     type: 'object',
-    required: ['id', 'typ_seansu', 'sala', 'id_filmu', 'godzina', 'data', 'cena'],
+    required: ['id', "presentation_type", 'roon', 'movie_id', 'time', 'date', 'price'],
     properties: {
         id: { type: "number" },
-        typ_seansu: { type: "number" },
-        sala: { type: "number" },
-        id_filmu: { type: "number" },
-        godzina: { type: "string" },
-        data: { type: "string" },
-        cena: { type: "string" },
+        presentation_type: { type: "number" },
+        room: { type: "number" },
+        movie_id: { type: "number" },
+        time: { type: "string" },
+        date: { type: "string" },
+        price: { type: "string" },
     }
 }
 

@@ -1,9 +1,11 @@
-export interface Show {
+export interface Screening {
     id: number;
-    typ_seansu: number;
-    film: number
-    sala: number;
-    godzina: string;
-    data: string;
-    cena: string
+    presentation_type: number;
+    movie_id: number
+    room: number;
+    time: string;
+    date: string;
+    price: string
 }
+
+export type Screenings = Screening[];
