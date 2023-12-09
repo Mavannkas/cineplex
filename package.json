@@ -13,7 +13,11 @@
     "watch:ts": "tsc -w",
     "dev": "npm run build:ts && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
     "dev:start": "fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js",
-    "info": "fastify print-routes ./dist/routes"
+    "info": "fastify print-routes ./dist/routes",
+    "mysql:build": "docker build -t mysql-image ./docker",
+    "mysql:init": "docker run -d -p 1234:3306 --name my-mysql-container mysql-image",
+    "mysql:start": "docker start my-mysql-container",
+    "mysql:stop": "docker stop my-mysql-container"
   },
   "keywords": [],
   "author": "",

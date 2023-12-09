@@ -6,9 +6,12 @@ export default fp<FastifyEnvOptions>(async (fastify) => {
     void fastify.register(Env, {
         schema: {
             type: 'object',
-            required: ['DB_PASSWORD', 'DB_HOST', 'DB_LOGIN', 'DB_NAME'],
+            required: ['DB_PORT', 'DB_PASSWORD', 'DB_HOST', 'DB_LOGIN', 'DB_NAME'],
             properties: {
                 PORT: {
+                    type: 'number',
+                },
+                DB_PORT: {
                     type: 'number',
                 },
                 DB_PASSWORD: {

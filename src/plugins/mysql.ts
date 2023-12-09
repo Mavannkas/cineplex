@@ -7,6 +7,7 @@ export default fp<MySQLOptions>(async (fastify) => {
         user: process.env.DB_LOGIN,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
+        port: +(process.env.DB_PORT || 3306),
         promise: true,
     })
 })
