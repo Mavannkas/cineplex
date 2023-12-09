@@ -54,6 +54,7 @@ jobs:
           username: ${{ vars.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ vars.SERVER_PORT }}
+          debug: true
           script: |
             cd /cineplex
             npm ci
