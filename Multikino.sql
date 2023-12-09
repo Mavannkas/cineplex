@@ -1,5 +1,5 @@
 CREATE TABLE `Locations` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `country` VARCHAR(255) NOT NULL,
   `city` VARCHAR(255) NOT NULL,
   `address` VARCHAR(255) NOT NULL,
@@ -8,12 +8,12 @@ CREATE TABLE `Locations` (
 );
 
 CREATE TABLE `Movies` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `title` VARCHAR(255) NOT NULL,
   `description` TEXT,
   `minimum_age` TINYINT NOT NULL,
-  `production_year` TINYINT NOT NULL,
-  `duration` TINYINT NOT NULL,
+  `production_year` MEDIUMINT NOT NULL,
+  `duration` MEDIUMINT NOT NULL,
   `director` VARCHAR(255) NOT NULL,
   `production_country` VARCHAR(255) NOT NULL,
   `premiere_date` DATE,
@@ -21,32 +21,32 @@ CREATE TABLE `Movies` (
 );
 
 CREATE TABLE `Languages` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `short_name` VARCHAR(10) NOT NULL,
   `full_name` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `PresentationTypes` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `language` INT NOT NULL,
   `subtitles` BOOLEAN NOT NULL,
   `subtitle_language` INT NOT NULL
 );
 
 CREATE TABLE `Genres` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `description` TEXT
 );
 
 CREATE TABLE `RoomTypes` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `description` TEXT
 );
 
 CREATE TABLE `Events` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `description` TEXT,
   `date` DATE,
@@ -54,13 +54,13 @@ CREATE TABLE `Events` (
 );
 
 CREATE TABLE `EventTypes` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `description` TEXT
 );
 
 CREATE TABLE `Rooms` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `number` TINYINT NOT NULL,
   `seating_capacity` INT NOT NULL,
   `location` INT NOT NULL,
@@ -68,17 +68,17 @@ CREATE TABLE `Rooms` (
 );
 
 CREATE TABLE `Screenings` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
   `presentation_type` INT NOT NULL,
   `room` INT NOT NULL,
-  `time` DATETIME,
+  `time` TIME,
   `date` DATE,
   `price` DECIMAL,
   `movie_id` INT NOT NULL
 );
 
 CREATE TABLE `Tickets` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `type` INT NOT NULL,
   `owner` VARCHAR(255) NOT NULL,
   `purchase_time` TIMESTAMP,
@@ -87,7 +87,7 @@ CREATE TABLE `Tickets` (
 );
 
 CREATE TABLE `TicketTypes` (
-  `id` INT PRIMARY KEY NOT NULL,
+  `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `description` TEXT,
   `discounted` BOOLEAN NOT NULL,
   `discount_amount` DECIMAL
@@ -154,3 +154,25 @@ ALTER TABLE `Screenings` ADD FOREIGN KEY (`presentation_type`) REFERENCES `Prese
 ALTER TABLE `Tickets` ADD FOREIGN KEY (`screening_id`) REFERENCES `Screenings` (`id`);
 
 ALTER TABLE `Tickets` ADD FOREIGN KEY (`type`) REFERENCES `TicketTypes` (`id`);
+
+INSERT INTO `Genres` (`id`, `name`, `description`) VALUES
+(1, 'Komedia', 'Jakiś tam opis komedii');
+
+INSERT INTO `Languages` (`id`, `short_name`, `full_name`) VALUES
+(1, 'PL', 'Polski'),
+(2, 'EN', 'English');
+
+INSERT INTO `Locations` (`id`, `country`, `city`, `address`, `email`, `phone`) VALUES
+(1, 'Polska', 'Wrocław', 'Nowogrodzka', 'kino.nowogrodzka@cineplex.pl', '69696969');
+
+INSERT INTO `Movies` (`id`, `title`, `description`, `minimum_age`, `production_year`, `duration`, `director`, `production_country`, `premiere_date`, `cast`) VALUES
+(1, 'Super Komedia 7', 'Super duper komedia 7', 18, 2001, 180, 'Ktośtsam', 'Polska', '2023-12-14', 'Osoba 1, Osoba 2, Osoba 3');
+
+INSERT INTO `PresentationTypes` (`id`, `language`, `subtitles`, `subtitle_language`) VALUES
+(1, 1, 1, 2);
+
+INSERT INTO `Rooms` (`id`, `number`, `seating_capacity`, `location`, `seat_arrangement`) VALUES
+(1, 1, 20, 1, '');
+
+INSERT INTO `Screenings` (`id`, `presentation_type`, `room`, `time`, `date`, `price`, `movie_id`) VALUES
+(1, 1, 1, '01:18:21', '2023-12-12', '12', 1);
