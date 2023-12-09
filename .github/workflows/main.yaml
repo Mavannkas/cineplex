@@ -19,10 +19,10 @@ jobs:
           node-version: 16.20.2
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Fastify App
-        run: npm run build
+        run: npm run build:ts
   deploy:
     runs-on: ubuntu-latest
     steps:
