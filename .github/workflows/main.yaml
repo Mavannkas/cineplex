@@ -38,21 +38,21 @@ jobs:
           echo "DB_PORT=${{ vars.DB_PORT }}" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "PORT=${{ vars.PORT }}" >> .env
-      # - name: Copy artifacts to server via SSH
-      #   uses: appleboy/scp-action@master
-      #   with:
-      #     host: ${{ vars.SERVER_HOST }}
-      #     username: ${{ vars.SERVER_USERNAME }}
-      #     password: ${{ secrets.SERVER_PASSWORD }}
-      #     port: ${{ vars.SERVER_PORT }}
-      #     source: "."
-      #     target: "/cineplex"
+      - name: Copy artifacts to server via SSH
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ vars.SERVER_HOST }}
+          username: ${{ vars.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ vars.SERVER_PORT }}
+          source: "."
+          target: "/cineplex"
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ vars.SERVER_HOST }}
           username: ${{ vars.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ vars.SERVER_PORT }}
           debug: true
           script: |
