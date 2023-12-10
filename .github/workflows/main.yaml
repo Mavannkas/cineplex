@@ -58,4 +58,4 @@ jobs:
           script: |
             cd ~/cineplex
             npm ci
-            pm2 restart your-app-name
+            npm run production:restart
