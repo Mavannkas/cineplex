@@ -24,6 +24,7 @@ export const showBody = {
         time: { type: "string" },
         date: { type: "string" },
         price: { type: "string" },
+        price2: { type: "boolean" },
     }
 }
 
