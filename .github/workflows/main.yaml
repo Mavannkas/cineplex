@@ -46,7 +46,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ vars.SERVER_PORT }}
           source: "."
-          target: "/cineplex"
+          target: "~/cineplex"
       - name: Deploy to Server
         uses: appleboy/ssh-action@master
         with:
@@ -56,6 +56,6 @@ jobs:
           port: ${{ vars.SERVER_PORT }}
           debug: true
           script: |
-            cd /cineplex
+            cd ~/cineplex
             npm ci
             pm2 restart your-app-name
