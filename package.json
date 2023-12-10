@@ -46,7 +46,7 @@
     "@types/tap": "^15.0.5",
     "c8": "^7.13.0",
     "concurrently": "^8.2.2",
-    "fastify-tsconfig": "^1.0.0",
+    "fastify-tsconfig": "^2.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^5.2.2"
   }
