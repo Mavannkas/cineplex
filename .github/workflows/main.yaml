@@ -54,8 +54,7 @@ jobs:
           username: ${{ vars.SERVER_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ vars.SERVER_PORT }}
-          debug: true
           script: |
             cd ~/cineplex
-            npm ci
+            npm i
             npm run production:restart
