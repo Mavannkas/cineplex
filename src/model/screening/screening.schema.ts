@@ -1,6 +1,6 @@
 import { RouteShorthandOptions } from "fastify";
 
-const show = {
+const screening = {
     type: 'object',
     required: ["id", "presentation_type", 'room', 'movie_id', 'time', 'date', 'price'],
     properties: {
@@ -14,7 +14,7 @@ const show = {
     }
 }
 
-export const showBody = {
+export const screeningBody = {
     type: 'object',
     required: ["presentation_type", 'room', 'movie_id', 'time', 'date', 'price'],
     properties: {
@@ -24,16 +24,15 @@ export const showBody = {
         time: { type: "string" },
         date: { type: "string" },
         price: { type: "string" },
-        price2: { type: "boolean" },
     }
 }
 
-export const showSchema: RouteShorthandOptions["schema"] = {
+export const screeningSchema: RouteShorthandOptions["schema"] = {
     response: {
         200: {
             type: 'array',
-            items: show,
+            items: screening,
         }
     },
-    body: showBody,
+    body: screeningBody,
 }
