@@ -37,6 +37,8 @@ const app: FastifyPluginAsync<AppOptions> = async (
     forceESM: true
   })
 
+  fastify.register(import('fastify-graceful-shutdown'))
+
   // This loads all plugins defined in routes
   // define your routes in one of these
   void fastify.register(AutoLoad, {

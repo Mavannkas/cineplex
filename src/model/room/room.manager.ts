@@ -54,9 +54,9 @@ export default class RoomManager {
 
         return seats;
     }
-    async getRooms(params?: PaginationParams) {
+    async getRooms(params?: PaginationParams): Promise<Room[]> {
         const [items] = await this.mysql.query(...queryWithPagination('SELECT * FROM Rooms', [], params))
-        return items
+        return items as Room[]
     }
 
     async createRoom(data: Omit<Room, "id">) {
