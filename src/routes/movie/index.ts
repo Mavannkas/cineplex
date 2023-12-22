@@ -19,3 +19,4 @@ const plugin: FastifyPluginAsync = async (fastify, opts) => {
 }
 
 export default plugin;
+
