@@ -64,7 +64,7 @@ CREATE TABLE `Rooms` (
   `number` TINYINT NOT NULL,
   `seating_capacity` INT NOT NULL,
   `location` INT NOT NULL,
-  `seat_arrangement` BLOB NOT NULL
+  `seat_arrangement` JSON NOT NULL
 );
 
 CREATE TABLE `Screenings` (
@@ -81,7 +81,7 @@ CREATE TABLE `Tickets` (
   `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `type` INT NOT NULL,
   `owner` VARCHAR(255) NOT NULL,
-  `purchase_time` TIMESTAMP,
+  `purchase_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
   `screening_id` INT NOT NULL,
   `seat` VARCHAR(255) NOT NULL
 );

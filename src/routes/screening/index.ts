@@ -1,11 +1,12 @@
 import { FastifyPluginAsync } from "fastify";
-import { showSchema } from "../../model/show/show.schema.js";
-import { Screening, Screenings } from "../../model/show/show.model.js";
+
+import { Screening, Screenings } from "../../model/screening/screening.model.js";
+import { screeningSchema } from "../../model/screening/screening.schema.js";
 
 const plugin: FastifyPluginAsync = async (fastify, opts) => {
     fastify.get("/", {
         schema: {
-            response: showSchema?.response
+            response: screeningSchema?.response
         },
     }, async (req, reply): Promise<Screenings> => {
         //Todo data layer as a custom plugin
@@ -15,9 +16,20 @@ const plugin: FastifyPluginAsync = async (fastify, opts) => {
         return rows as Screenings
     })
 
+    fastify.get("/:id/seats_status", {
+        schema: {
+            params: screeningSchema?.params,
+
+        }
+    }, async (request, reply) => {
+        const { id } = request?.params as { id: string };
+
+        return await fastify.room.getFreeSeatsById(id ?? "")
+    })
+
     fastify.post('/', {
         schema: {
-            body: showSchema?.body,
+            body: screeningSchema?.body,
         }
     }, async (req, reply) => {
         const { presentation_type, movie_id, room, time, date, price } = req.body as Screening
