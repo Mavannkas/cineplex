@@ -26,7 +26,14 @@ export const screeningBody = {
         price: { type: "string" },
     }
 }
-
+const screeningParams = {
+    type: 'object',
+    required: ['id'],
+    additionalProperties: false,
+    properties: {
+        id: { type: 'number' },
+    }
+}
 export const screeningSchema: RouteShorthandOptions["schema"] = {
     response: {
         200: {
@@ -35,4 +42,6 @@ export const screeningSchema: RouteShorthandOptions["schema"] = {
         }
     },
     body: screeningBody,
+    params: screeningParams,
+
 }

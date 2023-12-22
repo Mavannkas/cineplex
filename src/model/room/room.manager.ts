@@ -1,7 +1,8 @@
 import { MySQLPromisePool } from "@fastify/mysql";
-import { Room, isSeatArrangementArray } from "./room.model.js";
+import { Room, SeatStatus, isSeatArrangementArray } from "./room.model.js";
 import { httpErrors } from "@fastify/sensible";
 import { PaginationParams, queryWithPagination } from "../../utils/search.utils.js";
+import { getSingleItem } from "../../utils/manager.utils.js";
 
 
 const ROOM_SEAT_QUERY = `
@@ -9,7 +10,7 @@ SELECT Rooms.id as id, Tickets.seat as seat
 FROM Rooms 
 INNER JOIN Screenings ON Rooms.id = Screenings.room 
 INNER JOIN Tickets ON Screenings.id = Tickets.screening_id
-WHERE Rooms.id = ?
+WHERE Screenings.id = ?
 `;
 
 export default class RoomManager {
@@ -18,14 +19,20 @@ export default class RoomManager {
 
     async getRoomById(id: string): Promise<Room> {
         const [item] = await this.mysql.query('SELECT * FROM Rooms WHERE id = ?', [id])
-        if (!Array.isArray(item) || item.length === 0)
-            throw httpErrors.notFound("Room not found")
 
-        return (item?.[0] ?? {}) as Room
+        return getSingleItem(item)
     }
 
-    async getRoomWithFreeSeatsById(id: string): Promise<number[][]> {
-        const room = await this.getRoomById(id);
+    async getRoomByScreeningId(id: string | number): Promise<Room> {
+        const [item] = await this.mysql.query('SELECT Rooms.* FROM Rooms INNER JOIN Screenings ON Rooms.id = Screenings.room WHERE Screenings.id = ?', [id])
+
+        return getSingleItem(item)
+    }
+
+
+    // move to screening manager
+    async getFreeSeatsById(id: string | number): Promise<SeatStatus[][]> {
+        const room = await this.getRoomByScreeningId(id);
         if (!isSeatArrangementArray(room.seat_arrangement)) {
             return [];
         }
@@ -41,7 +48,7 @@ export default class RoomManager {
                     console.error(`Invalid seat arrangement for room ${id}: ${item.seat}`);
                     throw httpErrors.internalServerError()
                 }
-                seats[row][col] = 2;
+                seats[row][col] = SeatStatus.BOOKED_SEAT;
             }
         });
 

@@ -81,7 +81,7 @@ CREATE TABLE `Tickets` (
   `id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `type` INT NOT NULL,
   `owner` VARCHAR(255) NOT NULL,
-  `purchase_time` TIMESTAMP,
+  `purchase_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
   `screening_id` INT NOT NULL,
   `seat` VARCHAR(255) NOT NULL
 );

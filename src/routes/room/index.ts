@@ -34,16 +34,7 @@ const plugin: FastifyPluginAsync = async (fastify, opts) => {
         return await fastify.room.getRoomById(id ?? "")
     })
 
-    fastify.get("/:id/seats_status", {
-        schema: {
-            params: roomSchema?.params,
 
-        }
-    }, async (request, reply) => {
-        const { id } = request?.params as { id: string };
-
-        return await fastify.room.getRoomWithFreeSeatsById(id ?? "")
-    })
 
     fastify.post('/', {
         schema: {

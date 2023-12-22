@@ -16,6 +16,17 @@ const plugin: FastifyPluginAsync = async (fastify, opts) => {
         return rows as Screenings
     })
 
+    fastify.get("/:id/seats_status", {
+        schema: {
+            params: screeningSchema?.params,
+
+        }
+    }, async (request, reply) => {
+        const { id } = request?.params as { id: string };
+
+        return await fastify.room.getFreeSeatsById(id ?? "")
+    })
+
     fastify.post('/', {
         schema: {
             body: screeningSchema?.body,
