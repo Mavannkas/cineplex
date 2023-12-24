@@ -57,6 +57,5 @@ jobs:
           script: |
             cd ~/cineplex
             npm i
-            pwd
-            whoami
+            npm run build:ts
             npm run production:restart
