@@ -8,11 +8,11 @@
     "test": "test"
   },
   "scripts": {
-    "production:run": "pm2 start \"npm run start\" --name fastify-app",
+    "production:run": "pm2 start \"fastify start -l info dist/app.js\" --name fastify-app",
     "production:stop": "pm2 stop fastify-app",
     "production:logs": "pm2 logs fastify-app",
     "production:restart": "./node_modules/pm2/bin/pm2 restart fastify-app",
-    "start": "npm run build:ts && fastify start -l info dist/app.js",
+    "start": "fastify start -l info dist/app.js",
     "build:ts": "tsc",
     "watch:ts": "tsc -w",
     "dev": "npm run build:ts && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
