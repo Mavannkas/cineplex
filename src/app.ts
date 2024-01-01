@@ -8,7 +8,10 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export type AppOptions = {
-  // Place your custom options for app below here.
+  https?: {
+    key: string,
+    cert: string
+  }
 } & Partial<AutoloadPluginOptions>;
 
 
@@ -16,7 +19,12 @@ export type AppOptions = {
 const options: AppOptions = {
 }
 
-
+if (process.env.NODE_ENV === 'production') {
+  options.https = {
+    key: '~/ssl/cineplex/key.pem',
+    cert: '~/ssl/cineplex/cert.pem'
+  }
+}
 
 
 const app: FastifyPluginAsync<AppOptions> = async (

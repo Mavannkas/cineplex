@@ -33,6 +33,7 @@ export default class RoomManager {
     // move to screening manager
     async getFreeSeatsById(id: string | number): Promise<SeatStatus[][]> {
         const room = await this.getRoomByScreeningId(id);
+        console.log(room);
         if (!isSeatArrangementArray(room.seat_arrangement)) {
             return [];
         }

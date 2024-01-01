@@ -5,7 +5,7 @@ const reservationBody = {
     required: ['type', 'screening_id', 'seat', 'owner'],
     additionalProperties: false,
     properties: {
-        type: { type: 'number' },
+        type: { type: 'string' },
         screening_id: { type: 'number' },
         seat: { type: 'string', description: 'in format "row,col"' },
         owner: { type: 'string' },
