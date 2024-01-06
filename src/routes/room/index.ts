@@ -41,17 +41,24 @@ const plugin: FastifyPluginAsync = async (fastify, opts) => {
             body: roomSchema?.body,
             response: {
                 201: {
-                    type: 'null',
+                    type: 'object',
+                    additionalProperties: false,
+                    properties: {
+                        id: { type: 'number' },
+                    }
                 }
             }
         }
     }, async (request, reply) => {
         const { body } = request
+        console.log(body);
         if (!isRoom(body)) {
             throw fastify.httpErrors.badRequest("Invalid body")
         }
-        await fastify.room.createRoom(body);
         reply.status(201)
+        return {
+            id: await fastify.room.createRoom(body)
+        };
     })
 
     fastify.delete('/:id', {

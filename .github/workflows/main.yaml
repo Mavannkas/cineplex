@@ -38,6 +38,7 @@ jobs:
           echo "DB_PORT=${{ vars.DB_PORT }}" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "PORT=${{ vars.PORT }}" >> .env
+          echo "NODE_ENV=${{ vars.NODE_ENV }}" >> .env
       - name: Copy artifacts to server via SSH
         uses: appleboy/scp-action@master
         with:

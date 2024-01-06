@@ -62,7 +62,9 @@ export default class RoomManager {
 
     async createRoom(data: Omit<Room, "id">) {
         data.seat_arrangement = JSON.stringify(data.seat_arrangement)
-        await this.mysql.query('INSERT INTO Rooms SET ?', [data]);
+        const [result] = await this.mysql.query('INSERT INTO Rooms SET ?', [data]);
+        console.log(result);
+        return (result as { insertId: number }).insertId;
     }
 
     async deleteRoom(id: string) {
