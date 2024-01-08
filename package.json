@@ -8,11 +8,11 @@
     "test": "test"
   },
   "scripts": {
-    "production:run": "pm2 start \"npm run start\" --name fastify-app",
+    "production:run": "pm2 start \"fastify start -l info dist/app.js\" --name fastify-app",
     "production:stop": "pm2 stop fastify-app",
     "production:logs": "pm2 logs fastify-app",
     "production:restart": "./node_modules/pm2/bin/pm2 restart fastify-app",
-    "start": "npm run build:ts && fastify start -l info dist/app.js",
+    "start": "fastify start -l info dist/app.js",
     "build:ts": "tsc",
     "watch:ts": "tsc -w",
     "dev": "npm run build:ts && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
@@ -29,6 +29,7 @@
   "license": "ISC",
   "dependencies": {
     "@fastify/autoload": "^5.0.0",
+    "@fastify/cors": "^8.5.0",
     "@fastify/env": "^4.3.0",
     "@fastify/mysql": "^4.2.0",
     "@fastify/postgres": "^5.2.2",
@@ -37,6 +38,7 @@
     "@fastify/swagger-ui": "^2.0.1",
     "fastify": "^4.0.0",
     "fastify-cli": "^5.9.0",
+    "fastify-graceful-shutdown": "^3.5.1",
     "fastify-plugin": "^4.0.0",
     "pg": "^8.11.3",
     "pm2": "^5.3.0"

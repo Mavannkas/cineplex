@@ -33,6 +33,7 @@ export default class RoomManager {
     // move to screening manager
     async getFreeSeatsById(id: string | number): Promise<SeatStatus[][]> {
         const room = await this.getRoomByScreeningId(id);
+        console.log(room);
         if (!isSeatArrangementArray(room.seat_arrangement)) {
             return [];
         }
@@ -54,14 +55,16 @@ export default class RoomManager {
 
         return seats;
     }
-    async getRooms(params?: PaginationParams) {
+    async getRooms(params?: PaginationParams): Promise<Room[]> {
         const [items] = await this.mysql.query(...queryWithPagination('SELECT * FROM Rooms', [], params))
-        return items
+        return items as Room[]
     }
 
     async createRoom(data: Omit<Room, "id">) {
         data.seat_arrangement = JSON.stringify(data.seat_arrangement)
-        await this.mysql.query('INSERT INTO Rooms SET ?', [data]);
+        const [result] = await this.mysql.query('INSERT INTO Rooms SET ?', [data]);
+        console.log(result);
+        return (result as { insertId: number }).insertId;
     }
 
     async deleteRoom(id: string) {
