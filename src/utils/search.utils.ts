@@ -1,4 +1,4 @@
-import { MoviePaginationParams } from "../model/movie/movie.manager.js";
+import { MoviePaginationParams } from "../model/movie/movie.model.js";
 
 export interface PaginationParams {
   page?: number;
@@ -25,14 +25,14 @@ export function searchMoviePaginationParamsConditions(
   query: string;
   queryParams: any[];
 } {
+  const { page = 0, limit = 10, ...rest } = params ?? {};
+
   const conditions: string[] = [];
   const queryParams: any[] = [];
 
-  Object.keys(params).forEach((param) => {
-    if (params[param]) {
-      conditions.push(`${param} LIKE ?`);
-      queryParams.push(`%${params[param]}%`);
-    }
+  Object.entries(rest).forEach(([key, value]) => {
+    conditions.push(`${key} LIKE ?`);
+    queryParams.push(`%${value}%`);
   });
 
   const query =
