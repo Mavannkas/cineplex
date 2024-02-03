@@ -20,7 +20,7 @@ const movieBody = {
   type: "object",
   required: [
     "title",
-    "desciption",
+    "description",
     "minimum_age",
     "production_year",
     "duration",
@@ -52,7 +52,7 @@ const movieParams = {
   },
 };
 
-const roomQuery = {
+const movieQuery = {
   type: "object",
   additionalProperties: false,
   poperties: {
@@ -70,5 +70,5 @@ export const movieSchema: RouteShorthandOptions["schema"] = {
   },
   body: movieBody,
   params: movieParams,
-  querystring: roomQuery,
+  querystring: movieQuery,
 };

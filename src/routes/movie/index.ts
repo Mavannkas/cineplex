@@ -15,7 +15,7 @@ const plugin: FastifyPluginAsync = async (fastify, opts) => {
     "/:id",
     {
       schema: {
-        params: movieSchema?.body,
+        params: movieSchema?.params,
       },
     },
     async (request, reply) => {
